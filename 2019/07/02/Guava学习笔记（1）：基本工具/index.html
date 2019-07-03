@@ -105,7 +105,7 @@
 <meta property="og:description" content="有趣的Java库「番石榴」的学习记录。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://i.loli.net/2019/07/01/5d1a15df42d4730438.jpg">
-<meta property="og:updated_time" content="2019-07-02T15:27:23.299Z">
+<meta property="og:updated_time" content="2019-07-03T14:05:36.795Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Guava学习笔记（1）：基本工具">
 <meta name="twitter:description" content="有趣的Java库「番石榴」的学习记录。">
@@ -386,12 +386,24 @@
                 
               
 
-              <time title="创建时间：2019-07-02 20:14:44 / 修改时间：23:27:23" itemprop="dateCreated datePublished" datetime="2019-07-02T20:14:44+08:00">2019-07-02</time>
+              <time title="创建时间：2019-07-02 20:14:44" itemprop="dateCreated datePublished" datetime="2019-07-02T20:14:44+08:00">2019-07-02</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-07-03 22:05:36" itemprop="dateModified" datetime="2019-07-03T22:05:36+08:00">2019-07-03</time>
               
             
           </span>
@@ -462,7 +474,7 @@
 <h2 id="guava概述"><a class="header-anchor" href="#guava概述">¶</a>Guava概述</h2>
 <p><a href="https://github.com/google/guava" target="_blank" rel="noopener">Guava</a>是Google开源的一个Java库，提供用于集合，缓存，I/O，并发等实用方法。Guava的基本结构如图所示：</p>
 <p><img src="https://i.loli.net/2019/07/02/5d1b77942cf2d83205.jpg" alt="Guava结构"></p>
-<h2 id="1-基本工具"><a class="header-anchor" href="#1-基本工具">¶</a>1 基本工具</h2>
+<h2 id="1-基本工具-basic-utilities"><a class="header-anchor" href="#1-基本工具-basic-utilities">¶</a>1 基本工具「Basic utilities」</h2>
 <h3 id="1-1-optional"><a class="header-anchor" href="#1-1-optional">¶</a>1.1 Optional</h3>
 <p>Guava用Optional<t>表示可能为null的T类型引用。一个Optional实例可能包含非null的引用（我们称之为引用存在），也可能什么也不包括（称之为引用缺失）。</t></p>
 <p>使用Optional除了赋予null语义，增加了可读性，最大的优点在于它是一种傻瓜式的防护。Optional迫使你积极思考引用缺失的情况，因为你必须显式地从Optional获取引用。</p>
@@ -716,7 +728,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">¶前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#guava概述"><span class="nav-number">2.</span> <span class="nav-text">¶Guava概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-基本工具"><span class="nav-number">3.</span> <span class="nav-text">¶1 基本工具</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-optional"><span class="nav-number">3.1.</span> <span class="nav-text">¶1.1 Optional</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#optional的常用api"><span class="nav-number">3.1.1.</span> <span class="nav-text">¶Optional的常用Api</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-preconditions"><span class="nav-number">3.2.</span> <span class="nav-text">¶1.2 Preconditions</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#preconditions的常用api"><span class="nav-number">3.2.1.</span> <span class="nav-text">¶Preconditions的常用Api</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">¶前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#guava概述"><span class="nav-number">2.</span> <span class="nav-text">¶Guava概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-基本工具-basic-utilities"><span class="nav-number">3.</span> <span class="nav-text">¶1 基本工具「Basic utilities」</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-optional"><span class="nav-number">3.1.</span> <span class="nav-text">¶1.1 Optional</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#optional的常用api"><span class="nav-number">3.1.1.</span> <span class="nav-text">¶Optional的常用Api</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-preconditions"><span class="nav-number">3.2.</span> <span class="nav-text">¶1.2 Preconditions</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#preconditions的常用api"><span class="nav-number">3.2.1.</span> <span class="nav-text">¶Preconditions的常用Api</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
