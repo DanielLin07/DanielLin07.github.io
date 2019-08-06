@@ -1,0 +1,965 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-sakuragi.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-sakuragi.png?v=7.1.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.1.1',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="有趣的Java库「番石榴」的学习记录。">
+<meta name="keywords" content="Java,Guava">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Guava学习笔记">
+<meta property="og:url" content="https://daniellin07.github.io/2019/07/02/Guava学习笔记/index.html">
+<meta property="og:site_name" content="DanielLin07&#39;s Blog">
+<meta property="og:description" content="有趣的Java库「番石榴」的学习记录。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://i.loli.net/2019/07/01/5d1a15df42d4730438.jpg">
+<meta property="og:updated_time" content="2019-08-06T13:52:55.545Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Guava学习笔记">
+<meta name="twitter:description" content="有趣的Java库「番石榴」的学习记录。">
+<meta name="twitter:image" content="https://i.loli.net/2019/07/01/5d1a15df42d4730438.jpg">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="https://daniellin07.github.io/2019/07/02/Guava学习笔记/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Guava学习笔记 | DanielLin07's Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">DanielLin07's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://daniellin07.github.io/2019/07/02/Guava学习笔记/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="DanielLin07">
+      <meta itemprop="description" content="咸鱼写字的地方">
+      <meta itemprop="image" content="https://i.loli.net/2019/05/18/5cdfd0a4a17eb92907.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DanielLin07's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Guava学习笔记
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-07-02 20:14:44" itemprop="dateCreated datePublished" datetime="2019-07-02T20:14:44+08:00">2019-07-02</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-08-06 21:52:55" itemprop="dateModified" datetime="2019-08-06T21:52:55+08:00">2019-08-06</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java笔记/" itemprop="url" rel="index"><span itemprop="name">Java笔记</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+            <div class="post-description">有趣的Java库「番石榴」的学习记录。</div>
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+        <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
+          
+          
+            <div class="post-gallery-row">
+              <img src="https://i.loli.net/2019/07/01/5d1a15df42d4730438.jpg" itemprop="contentUrl">
+            
+          
+
+          
+          </div>
+        </div>
+      
+
+      
+        <h2 id="前言"><a class="header-anchor" href="#前言">¶</a>前言</h2>
+<p>从入职第一天开始，导师就和我安利<a href="https://github.com/google/guava" target="_blank" rel="noopener">Guava</a>。本篇先从Guava的使用开始，做一个Guava的学习记录。由于个人用的比较多的是JDK1.7与JDK1.8，所以在有必要时会进行版本区分说明，JDK1.7之前的版本情况暂时不作记录。</p>
+<h2 id="guava概述"><a class="header-anchor" href="#guava概述">¶</a>Guava概述</h2>
+<p><a href="https://github.com/google/guava" target="_blank" rel="noopener">Guava</a>是Google开源的一个Java库，Google最早提出它，是对Java Collection进行扩展以提高开发效率。随着时间推移，Guava已经覆盖到了Java开发的方方面面，包括提供用于集合，缓存，I/O，并发等。截止到28.0-jre版本，Guava的基本结构如图所示：</p>
+<p><img src="https://i.loli.net/2019/07/02/5d1b77942cf2d83205.jpg" alt="Guava结构"></p>
+<p>本笔记记录了个人的Guava学习重点总结，主要面向的Java版本是JDK1.7与JDK1.8，针对其他版本的特性暂不作记录，更多完整的内容可以参考Guava的<a href="https://ifeve.com/google-guava/" target="_blank" rel="noopener">中文指导</a>、<a href="https://github.com/google/guava/wiki" target="_blank" rel="noopener">英文指导</a>与<a href="https://guava.dev/releases/snapshot-jre/api/docs/" target="_blank" rel="noopener">Api文档</a>。</p>
+<h2 id="1-基本工具-basic-utilities"><a class="header-anchor" href="#1-基本工具-basic-utilities">¶</a>1 基本工具「Basic utilities」</h2>
+<h3 id="1-1-optional"><a class="header-anchor" href="#1-1-optional">¶</a>1.1 Optional</h3>
+<p>Guava用<code>Optional&lt;T&gt;</code>表示可能为<code>null</code>的<code>T</code>类型引用。一个<code>Optional</code>实例可能包含非<code>null</code>的引用（我们称之为引用存在），也可能什么也不包括（称之为引用缺失）。</p>
+<p>使用<code>Optional</code>除了赋予<code>null</code>语义，增加了可读性，最大的优点在于它是一种傻瓜式的防护。<code>Optional</code>迫使你积极思考引用缺失的情况，因为你必须显式地从<code>Optional</code>获取引用。</p>
+<h4 id="optional的常用api"><a class="header-anchor" href="#optional的常用api">¶</a>Optional的常用Api</h4>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Optional的常用Api</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">baseOptional</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建指定引用的Optional实例，若引用为null则快速失败</span></span><br><span class="line">    Optional&lt;Integer&gt; possible = Optional.of(<span class="number">5</span>);</span><br><span class="line">    <span class="comment">// 返回true</span></span><br><span class="line">    possible.isPresent();</span><br><span class="line">    <span class="comment">// 返回5</span></span><br><span class="line">    possible.get();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 抛出 NullPointerException</span></span><br><span class="line">    <span class="comment">// possible = Optional.of(null);</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建引用缺失的Optional实例</span></span><br><span class="line">    possible = Optional.absent();</span><br><span class="line">    <span class="comment">// 抛出 IllegalStateException</span></span><br><span class="line">    <span class="comment">// possible.get();</span></span><br><span class="line">    <span class="comment">// 返回5</span></span><br><span class="line">    possible.or(<span class="number">5</span>);</span><br><span class="line">    <span class="comment">// 返回null</span></span><br><span class="line">    possible.orNull();</span><br><span class="line"></span><br><span class="line">    possible = Optional.fromNullable(<span class="number">5</span>);</span><br><span class="line">    <span class="comment">// 返回5</span></span><br><span class="line">    possible.get();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建引用缺失的Optional实例</span></span><br><span class="line">    possible = Optional.fromNullable(<span class="keyword">null</span>);</span><br><span class="line">    <span class="comment">// 抛出 IllegalStateException</span></span><br><span class="line">    <span class="comment">// possible.get();</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在JDK1.8中已经提供了功能相同的<code>java.util.Optional</code>类。</p>
+<h3 id="1-2-preconditions"><a class="header-anchor" href="#1-2-preconditions">¶</a>1.2 Preconditions</h3>
+<p>前置条件：让方法调用的前置条件判断更简单。</p>
+<h4 id="preconditions的常用api"><a class="header-anchor" href="#preconditions的常用api">¶</a>Preconditions的常用Api</h4>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Preconditions的常用Api</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">basePreconditions</span><span class="params">(Integer param1, <span class="keyword">int</span>[] param2)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">     * 检查boolean是否为true，用来检查传递给方法的参数</span></span><br><span class="line"><span class="comment">     * 检查失败时抛出 IllegalArgumentException</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    Preconditions.checkArgument(param1 != <span class="keyword">null</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">     * 检查value是否为null，该方法直接返回value，因此可以内嵌使用checkNotNull</span></span><br><span class="line"><span class="comment">     * 检查失败时抛出 NullPointerException</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    Integer index = Preconditions.checkNotNull(param1);</span><br><span class="line"></span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">     * 用来检查对象的某些状态</span></span><br><span class="line"><span class="comment">     * 检查失败时抛出 IllegalStateException</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    Preconditions.checkState(param1 == <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">     * 检查index作为索引值对某个列表、字符串或数组是否有效。index &gt;= 0 &amp;&amp; index &lt; size</span></span><br><span class="line"><span class="comment">     * 检查失败时抛出 IndexOutOfBoundsException</span></span><br><span class="line"><span class="comment">     * 索引值常用来查找列表、字符串或数组中的元素，如List.get(int), String.charAt(int)</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    Preconditions.checkElementIndex(index, param2.length);</span><br><span class="line"></span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">     * 检查index作为位置值对某个列表、字符串或数组是否有效。index &gt;= 0 &amp;&amp; index &lt;= size</span></span><br><span class="line"><span class="comment">     * 检查失败时抛出 IndexOutOfBoundsException</span></span><br><span class="line"><span class="comment">     * 位置值和位置范围常用来截取列表、字符串或数组，如List.subList(int，int), String.substring(int)</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    Preconditions.checkPositionIndex(index, param2.length);</span><br><span class="line"></span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">     * 检查[start, end]表示的位置范围对某个列表、字符串或数组是否有效</span></span><br><span class="line"><span class="comment">     * 检查失败时抛出 IllegalStateException</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    Preconditions.checkPositionIndexes(<span class="number">0</span>, <span class="number">5</span>, param2.length);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="1-3-ordering"><a class="header-anchor" href="#1-3-ordering">¶</a>1.3 Ordering</h3>
+<p>Ordering是Guava链式风格比较器Comparator的实现，它可以用来为构建复杂的比较器，以完成集合排序的功能。</p>
+<p>从实现上说，Ordering实例就是一个特殊的Comparator实例。Ordering把很多基于Comparator的静态方法包装为自己的实例方法，并且提供了链式调用方法，来定制和增强现有的比较器。</p>
+<h4 id="ordering的常用api"><a class="header-anchor" href="#ordering的常用api">¶</a>Ordering的常用Api</h4>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Ordering的常用Api</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">baseOrdering</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 对可排序类型做自然排序，如数字按大小，日期按先后排序</span></span><br><span class="line">    Ordering&lt;String&gt; naturalOrdering = natural();</span><br><span class="line">    <span class="comment">// 按对象的字符串形式做字典排序</span></span><br><span class="line">    Ordering&lt;Object&gt; usingToStringOrdering = usingToString();</span><br><span class="line">    <span class="comment">// 把给定的Comparator转化为排序器</span></span><br><span class="line">    Ordering&lt;String&gt; fromOrdering = Ordering.from(<span class="keyword">new</span> Comparator&lt;String&gt;() &#123;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compare</span><span class="params">(String o1, String o2)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> o1.hashCode() - o2.hashCode() ;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="comment">// 直接继承Ordering</span></span><br><span class="line">    Ordering&lt;String&gt; byLengthOrdering = <span class="keyword">new</span> Ordering&lt;String&gt;() &#123;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compare</span><span class="params">(String left, String right)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> Ints.compare(left.length(), right.length());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    List&lt;String&gt; withNullList = Lists.newArrayList(list);</span><br><span class="line">    withNullList.add(<span class="keyword">null</span>);</span><br><span class="line">    System.out.println(<span class="string">"withNullList:"</span>+ withNullList);</span><br><span class="line"></span><br><span class="line">    List&lt;List&gt; listList = Lists.newArrayList();</span><br><span class="line">    listList.add(Lists.newArrayList(<span class="string">"perter"</span>, <span class="string">"jerry"</span>));</span><br><span class="line">    listList.add(Lists.newArrayList(<span class="string">"perter"</span>));</span><br><span class="line">    listList.add(Lists.newArrayList(<span class="string">"perter"</span>, <span class="string">"jerry"</span>, <span class="keyword">null</span>));</span><br><span class="line">    System.out.println(<span class="string">"listList:"</span>+ withNullList);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 对可排序类型做自然排序，如数字按大小，日期按先后排序</span></span><br><span class="line">    Ordering&lt;String&gt; naturalOrdering = natural();</span><br><span class="line">    <span class="comment">// 获取语义相反的排序器</span></span><br><span class="line">    Ordering&lt;String&gt; reverseOrdering = natural().reverse();</span><br><span class="line">    <span class="comment">// 使用当前排序器，但额外把null值排到最前面</span></span><br><span class="line">    Ordering&lt;String&gt; nullsFirst = natural().nullsFirst();</span><br><span class="line">    <span class="comment">// 使用当前排序器，但额外把null值排到最后面</span></span><br><span class="line">    Ordering&lt;String&gt; nullsLast = natural().nullsLast();</span><br><span class="line">    <span class="comment">// 合成另一个比较器，以处理当前排序器中的相等情况</span></span><br><span class="line">    Ordering&lt;People&gt; secondaryOrdering = <span class="keyword">new</span> PeopleAgeOrder().compound(<span class="keyword">new</span> PeopleNameLengthOrder());</span><br><span class="line">    <span class="comment">// 返回该类型的可迭代对象Iterable&lt;T&gt;的排序器</span></span><br><span class="line">    Ordering lexicographicalOrdering = naturalOrdering.lexicographical();</span><br><span class="line">    <span class="comment">// 对集合中元素调用Function，再按返回值用当前排序器排序</span></span><br><span class="line">    Ordering&lt;String&gt; resultOfOrdering = natural().nullsFirst().onResultOf(<span class="keyword">new</span> Function&lt;String, Integer&gt;() &#123;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> Integer <span class="title">apply</span><span class="params">(String input)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> input == <span class="keyword">null</span> ? <span class="keyword">null</span> : input.length();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="1-4-objects"><a class="header-anchor" href="#1-4-objects">¶</a>1.4 Objects</h3>
+<p>Objects与JDK1.7中提供的方法类似，不再赘述。</p>
+<h3 id="1-5-throwables"><a class="header-anchor" href="#1-5-throwables">¶</a>1.5 Throwables</h3>
+<p>Throwables与JDK1.7中提供的多重catch功能类似，不再赘述。</p>
+<h2 id="2-集合-collections"><a class="header-anchor" href="#2-集合-collections">¶</a>2 集合「Collections」</h2>
+<h3 id="2-1-不可变集合"><a class="header-anchor" href="#2-1-不可变集合">¶</a>2.1 不可变集合</h3>
+<p>不可变集合因为不可变性，所以可以作为常量，且在被多个线程调用时，不存在竞态条件问题。</p>
+<h4 id="不可变集合的常用api"><a class="header-anchor" href="#不可变集合的常用api">¶</a>不可变集合的常用Api</h4>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 不可变集合常用Api</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">baseImmutable</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    Set&lt;String&gt; colors = Sets.newHashSet(<span class="string">"red"</span>, <span class="string">"orange"</span>, <span class="string">"yellow"</span>);</span><br><span class="line">    Set&lt;Color&gt; colorSet = Sets.newHashSet(<span class="keyword">new</span> Color(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>));</span><br><span class="line"></span><br><span class="line">    <span class="comment">// copyOf方法</span></span><br><span class="line">    ImmutableSet.copyOf(colors);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// of方法</span></span><br><span class="line">    ImmutableSet.of(colors);</span><br><span class="line">    ImmutableSet.of(<span class="string">"red"</span>, <span class="string">"orange"</span>, <span class="string">"yellow"</span>);</span><br><span class="line">    ImmutableMap.of(<span class="string">"a"</span>, <span class="number">1</span>, <span class="string">"b"</span>, <span class="number">2</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Builder工具</span></span><br><span class="line">    ImmutableSet&lt;Color&gt; GOOGLE_COLORS = ImmutableSet.&lt;Color&gt;builder()</span><br><span class="line">            .addAll(colorSet)</span><br><span class="line">            .add(<span class="keyword">new</span> Color(<span class="number">0</span>, <span class="number">191</span>, <span class="number">255</span>))</span><br><span class="line">            .build();</span><br><span class="line"></span><br><span class="line">    ImmutableSet&lt;String&gt; colorList = ImmutableSet.of(<span class="string">"red"</span>, <span class="string">"orange"</span>, <span class="string">"yellow"</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// ImmutableXXX.copyOf方法会尝试在安全的时候避免做拷贝</span></span><br><span class="line">    <span class="comment">// 在这段代码中，ImmutableList.copyOf(colorList)会智能地直接返回colorList.asList()</span></span><br><span class="line">    <span class="comment">// 它是一个ImmutableSet的常量时间复杂度的List视图</span></span><br><span class="line">    ImmutableList.copyOf(colorList);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 所有不可变集合都有一个asList()方法提供ImmutableList视图</span></span><br><span class="line">    ImmutableList immutableList = colorList.asList();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="2-2-新集合类型"><a class="header-anchor" href="#2-2-新集合类型">¶</a>2.2 新集合类型</h3>
+<p>Guava引入了很多JDK没有但是非常有用的新集合类型。</p>
+<h4 id="2-2-1-multiset"><a class="header-anchor" href="#2-2-1-multiset">¶</a>2.2.1 Multiset</h4>
+<p>Multiset允许元素重复，元素之间没有顺序。<br>
+我们经常碰到一类统计需求——统计某个对象（常见的如字符串）在一个集合中的出现次数，使用JDK提供的数据结构，我们会这么做：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Map&lt;String, Integer&gt; counts = <span class="keyword">new</span> HashMap&lt;String, Integer&gt;();</span><br><span class="line"><span class="keyword">for</span> (String word : words) &#123;</span><br><span class="line">    Integer count = counts.get(word);</span><br><span class="line">    <span class="keyword">if</span> (count == <span class="keyword">null</span>) &#123;</span><br><span class="line">        counts.put(word, <span class="number">1</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        counts.put(word, count + <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Guava提供了一个新集合类型 Multiset，它可以多次添加相等的元素，使用Guava改进代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">Multiset&lt;String&gt; multiset = HashMultiset.create();</span><br><span class="line"></span><br><span class="line">multiset.add(<span class="string">"a"</span>);</span><br><span class="line">multiset.add(<span class="string">"a"</span>);</span><br><span class="line"><span class="comment">// 添加"b"元素5次</span></span><br><span class="line">multiset.add(<span class="string">"b"</span>, <span class="number">5</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 返回[a, b]</span></span><br><span class="line">multiset.elementSet();</span><br><span class="line"><span class="comment">// 返回2</span></span><br><span class="line">multiset.count(<span class="string">"a"</span>);</span><br><span class="line"><span class="comment">// 返回5</span></span><br><span class="line">multiset.count(<span class="string">"b"</span>);</span><br><span class="line"><span class="comment">// 返回0</span></span><br><span class="line">multiset.count(<span class="string">"c"</span>);</span><br></pre></td></tr></table></figure>
+<h4 id="2-2-2-multimap"><a class="header-anchor" href="#2-2-2-multimap">¶</a>2.2.2 Multimap</h4>
+<p>Multimap可以把键映射到任意多个值上。<br>
+在JDK提供的集合元素中，我们经常会使用Map&lt;K, List<v>&gt;以及Map&lt;K, Set<v>&gt;用来表达某一个Key对应的元素是一个集合，在Guava中，使用MultiMap可以达到这样的效果：</v></v></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">Multimap&lt;String, Integer&gt; multiMap = ArrayListMultimap.create();</span><br><span class="line">multiMap.put(<span class="string">"a"</span>, <span class="number">1</span>);</span><br><span class="line">multiMap.put(<span class="string">"a"</span>, <span class="number">2</span>);</span><br><span class="line">multiMap.put(<span class="string">"a"</span>, <span class="number">4</span>);</span><br><span class="line">multiMap.put(<span class="string">"b"</span>, <span class="number">3</span>);</span><br><span class="line">multiMap.put(<span class="string">"c"</span>, <span class="number">5</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// [a x 3, b, c]</span></span><br><span class="line">multiMap.keys();</span><br><span class="line"><span class="comment">// [a, b, c]</span></span><br><span class="line">multiMap.keySet();</span><br><span class="line"><span class="comment">// [1 ,2, 4]</span></span><br><span class="line">multiMap.get(<span class="string">"a"</span>);</span><br><span class="line"><span class="comment">// [3]</span></span><br><span class="line">multiMap.get(<span class="string">"b"</span>);</span><br><span class="line"><span class="comment">// [5]</span></span><br><span class="line">multiMap.get(<span class="string">"c"</span>);</span><br><span class="line"><span class="comment">// []</span></span><br><span class="line">multiMap.get(<span class="string">"d"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// &#123;a=[1, 2, 4], b=[3], c=[5]&#125;</span></span><br><span class="line">multiMap.asMap();</span><br></pre></td></tr></table></figure>
+<h4 id="2-2-3-table"><a class="header-anchor" href="#2-2-3-table">¶</a>2.2.3 Table</h4>
+<p><code>Table</code>带有两个支持所有类型的键：”行”和”列”。<br>
+我们有时候会用到这样一种数据结构：<code>Map&lt;R, Map&lt;C, V&gt;&gt;</code>，在Guava中，可以使用<code>Table</code>来实现：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">Table&lt;Integer, Integer, Double&gt; weightedGraph = HashBasedTable.create();</span><br><span class="line">weightedGraph.put(<span class="number">1</span>, <span class="number">2</span>, <span class="number">4</span>d);</span><br><span class="line">weightedGraph.put(<span class="number">1</span>, <span class="number">3</span>, <span class="number">20</span>d);</span><br><span class="line">weightedGraph.put(<span class="number">2</span>, <span class="number">3</span>, <span class="number">5</span>d);</span><br><span class="line"><span class="comment">// 返回&#123;1=&#123;2=4.0, 3=20.0&#125;, 2=&#123;3=5.0&#125;&#125;</span></span><br><span class="line">System.out.println(weightedGraph);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 用Map&lt;R, Map&lt;C, V&gt;&gt;表现Table&lt;R, C, V&gt;</span></span><br><span class="line">Map&lt;Integer, Map&lt;Integer, Double&gt;&gt; map = weightedGraph.rowMap();</span><br><span class="line"><span class="comment">// 返回&#123;1=&#123;2=4.0, 3=20.0&#125;, 2=&#123;3=5.0&#125;&#125;</span></span><br><span class="line">System.out.println(map);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 返回”行”的集合Set&lt;R&gt;</span></span><br><span class="line">Set&lt;Integer&gt; set = weightedGraph.rowKeySet();</span><br><span class="line"><span class="comment">// 返回[1, 2]</span></span><br><span class="line">System.out.println(set);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 用Map&lt;C, V&gt;返回给定”行”的所有列</span></span><br><span class="line"><span class="comment">// 类似的列访问方法：columnMap()、columnKeySet()、column(c)</span></span><br><span class="line"><span class="comment">// （基于列的访问会比基于的行访问稍微低效点）</span></span><br><span class="line">Map&lt;Integer, Double&gt; row = weightedGraph.row(<span class="number">2</span>);</span><br><span class="line"><span class="comment">// 返回[1, 2]</span></span><br><span class="line">System.out.println(set);</span><br><span class="line"><span class="comment">// 对这个map进行的写操作也将写入Table中</span></span><br><span class="line">row.put(<span class="number">4</span>, <span class="number">6</span>d);</span><br><span class="line">row.put(<span class="number">5</span>, <span class="number">8</span>d);</span><br><span class="line"><span class="comment">// 返回&#123;1=&#123;2=4.0, 3=20.0&#125;, 2=&#123;3=5.0, 4=6.0, 5=8.0&#125;&#125;</span></span><br><span class="line">System.out.println(weightedGraph);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 用元素类型为Table.Cell&lt;R, C, V&gt;的Set表现Table&lt;R, C, V&gt;</span></span><br><span class="line"><span class="comment">// Cell类似于Map.Entry，但它是用行和列两个键区分的</span></span><br><span class="line">Set&lt;Table.Cell&lt;Integer, Integer, Double&gt;&gt; cells = weightedGraph.cellSet();</span><br><span class="line"><span class="comment">// 返回[(1,2)=4.0, (1,3)=20.0, (2,3)=5.0, (2,4)=6.0, (2,5)=8.0]</span></span><br><span class="line">System.out.println(cells);</span><br></pre></td></tr></table></figure>
+<p>其他更多新集合类型见Guava的中文指导：新集合类型。</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Java/" rel="tag"># Java</a>
+          
+            <a href="/tags/Guava/" rel="tag"># Guava</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/06/09/Linux常用命令/" rel="next" title="Linux常用命令">
+                <i class="fa fa-chevron-left"></i> Linux常用命令
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/08/06/初识分库分表/" rel="prev" title="初识分库分表">
+                初识分库分表 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="https://i.loli.net/2019/05/18/5cdfd0a4a17eb92907.jpg" alt="DanielLin07">
+            
+              <p class="site-author-name" itemprop="name">DanielLin07</p>
+              <div class="site-description motion-element" itemprop="description">咸鱼写字的地方</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">5</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">4</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">8</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/DanielLin07" title="GitHub &rarr; https://github.com/DanielLin07" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:gengxianng_lin@foxmail.com" title="E-Mail &rarr; mailto:gengxianng_lin@foxmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://weibo.com/lintwogee" title="Weibo &rarr; https://weibo.com/lintwogee" rel="noopener" target="_blank"><i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">¶前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#guava概述"><span class="nav-number">2.</span> <span class="nav-text">¶Guava概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-基本工具-basic-utilities"><span class="nav-number">3.</span> <span class="nav-text">¶1 基本工具「Basic utilities」</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-optional"><span class="nav-number">3.1.</span> <span class="nav-text">¶1.1 Optional</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#optional的常用api"><span class="nav-number">3.1.1.</span> <span class="nav-text">¶Optional的常用Api</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-preconditions"><span class="nav-number">3.2.</span> <span class="nav-text">¶1.2 Preconditions</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#preconditions的常用api"><span class="nav-number">3.2.1.</span> <span class="nav-text">¶Preconditions的常用Api</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-ordering"><span class="nav-number">3.3.</span> <span class="nav-text">¶1.3 Ordering</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ordering的常用api"><span class="nav-number">3.3.1.</span> <span class="nav-text">¶Ordering的常用Api</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-objects"><span class="nav-number">3.4.</span> <span class="nav-text">¶1.4 Objects</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-5-throwables"><span class="nav-number">3.5.</span> <span class="nav-text">¶1.5 Throwables</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-集合-collections"><span class="nav-number">4.</span> <span class="nav-text">¶2 集合「Collections」</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-不可变集合"><span class="nav-number">4.1.</span> <span class="nav-text">¶2.1 不可变集合</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#不可变集合的常用api"><span class="nav-number">4.1.1.</span> <span class="nav-text">¶不可变集合的常用Api</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-新集合类型"><span class="nav-number">4.2.</span> <span class="nav-text">¶2.2 新集合类型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-1-multiset"><span class="nav-number">4.2.1.</span> <span class="nav-text">¶2.2.1 Multiset</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-2-multimap"><span class="nav-number">4.2.2.</span> <span class="nav-text">¶2.2.2 Multimap</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-3-table"><span class="nav-number">4.2.3.</span> <span class="nav-text">¶2.2.3 Table</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">DanielLin07</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.1.1</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.1"></script>
+
+  <script src="/js/motion.js?v=7.1.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/schemes/muse.js?v=7.1.1"></script>
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.1"></script>
+<script src="/js/post-details.js?v=7.1.1"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.1"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
