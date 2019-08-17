@@ -105,7 +105,7 @@
 <meta property="og:description" content="记录自己在学习以及工作中经常用到的Linux命令。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://i.loli.net/2019/06/09/5cfcc62f8a7d636528.jpg">
-<meta property="og:updated_time" content="2019-07-03T14:00:13.470Z">
+<meta property="og:updated_time" content="2019-08-17T08:01:53.791Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux常用命令">
 <meta name="twitter:description" content="记录自己在学习以及工作中经常用到的Linux命令。">
@@ -403,7 +403,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-07-03 22:00:13" itemprop="dateModified" datetime="2019-07-03T22:00:13+08:00">2019-07-03</time>
+                <time title="修改时间：2019-08-17 16:01:53" itemprop="dateModified" datetime="2019-08-17T16:01:53+08:00">2019-08-17</time>
               
             
           </span>
@@ -469,10 +469,10 @@
       
 
       
-        <h2 id="前言"><a class="header-anchor" href="#前言">¶</a>前言</h2>
+        <h1>前言</h1>
 <p>这两周的工作基本都是与Linux有关，而自己并没有系统学习过Linux与操作系统课程，本篇博客就记录自己常用到的Linux命令，方便日后翻阅与补充。</p>
-<h2 id="常用命令"><a class="header-anchor" href="#常用命令">¶</a>常用命令</h2>
-<h3 id="基本命令"><a class="header-anchor" href="#基本命令">¶</a>基本命令</h3>
+<h1>常用命令</h1>
+<h2 id="基本命令"><a class="header-anchor" href="#基本命令">¶</a>基本命令</h2>
 <ul>
 <li>
 <p><code>cd [dirName]</code>命令，目录跳转，如：<code>cd /tmp/log</code>，需要注意的是绝对路径与相对路径</p>
@@ -513,7 +513,7 @@
 <p><code>tar [参数] file</code>命令，解压tar文件，常用的是；<code>tar -xvf file.tar -C /tmp</code>将file.tar压缩包解压到/tmp目录下</p>
 </li>
 </ul>
-<h3 id="日志查看命令"><a class="header-anchor" href="#日志查看命令">¶</a>日志查看命令</h3>
+<h2 id="日志查看命令"><a class="header-anchor" href="#日志查看命令">¶</a>日志查看命令</h2>
 <p>除了<code>vi</code>与<code>vim</code>外，日志查看还可以用以下几个命令进行：</p>
 <ul>
 <li>
@@ -539,7 +539,7 @@
 </li>
 </ul>
 <p>在我个人的线上日志查看以及异常排查当中，由于线上日志的量非常非常大，所以我通常会更多的使用<code>less</code>命令+搜索匹配的方式去定位异常。</p>
-<h3 id="查找文件命令"><a class="header-anchor" href="#查找文件命令">¶</a>查找文件命令</h3>
+<h2 id="查找文件命令"><a class="header-anchor" href="#查找文件命令">¶</a>查找文件命令</h2>
 <ul>
 <li>
 <p><code>find path -option [-print] [-exec -ok command ] {} \</code>命令，请参考<a href="https://www.runoob.com/linux/linux-comm-find.html" target="_blank" rel="noopener">菜鸟教程</a>，常用的<code>find</code>命令示例如下：</p>
@@ -804,7 +804,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">¶前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常用命令"><span class="nav-number">2.</span> <span class="nav-text">¶常用命令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本命令"><span class="nav-number">2.1.</span> <span class="nav-text">¶基本命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#日志查看命令"><span class="nav-number">2.2.</span> <span class="nav-text">¶日志查看命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查找文件命令"><span class="nav-number">2.3.</span> <span class="nav-text">¶查找文件命令</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">2.</span> <span class="nav-text">常用命令</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#基本命令"><span class="nav-number">2.1.</span> <span class="nav-text">¶基本命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#日志查看命令"><span class="nav-number">2.2.</span> <span class="nav-text">¶日志查看命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查找文件命令"><span class="nav-number">2.3.</span> <span class="nav-text">¶查找文件命令</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -843,15 +843,15 @@
     本站访客数:<span id="busuanzi_value_site_uv"></span>
     </span>
   </div>
-  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.8.0</div>
+  <!-- <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.8.0</div> -->
 
 
 
-  <span class="post-meta-divider">|</span>
+  <!-- <span class="post-meta-divider">|</span> -->
 
 
 
-  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.1.1</div>
+  <!-- <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.1.1</div> -->
 
 
 
